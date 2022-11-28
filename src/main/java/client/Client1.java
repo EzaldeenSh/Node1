@@ -29,6 +29,11 @@ public class Client1 {
         ObjectInputStream fromServer;
         ObjectOutputStream toServer;
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
         try (Socket client = new Socket("localhost", portNumber)) {
             System.out.println("connected to " + portNumber);
             Scanner sc = new Scanner(System.in);

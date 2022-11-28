@@ -1,8 +1,5 @@
 package data;
-
-
 import communication.*;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,16 +8,23 @@ import java.util.List;
 public class Node implements Observer, Subject {
 
     private List<Integer> otherNodesPorts;
-    private final String NodeId;
+    private final String nodeID;
     private int portNumber;
     private int numberOfConnectedUsers;
 
-    public Node(String nodeId, int portNumber, int numberOfConnectedUsers) {
-        NodeId = nodeId;
-        this.portNumber = portNumber;
-        this.numberOfConnectedUsers = numberOfConnectedUsers;
-        registerObservers();
+    private static Node instance;
 
+    private Node() {
+        nodeID = "node1";
+        this.portNumber = 8081;
+        this.numberOfConnectedUsers = 0;
+        registerObservers();
+    }
+    public static Node getInstance(){
+        if (instance == null){
+            instance = new Node();
+        }
+        return instance;
     }
     @Override
     public void registerObservers() {
@@ -28,9 +32,6 @@ public class Node implements Observer, Subject {
         otherNodesPorts.add(8082);
         otherNodesPorts.add(8083);
         otherNodesPorts.add(8084);
-    }
-    public String getNodeID(){
-    return NodeId;
     }
 
     public void setPortNumber(int portNumber) {
@@ -40,8 +41,8 @@ public class Node implements Observer, Subject {
     public void setNumberOfConnectedUsers(int numberOfConnectedClients) {
         this.numberOfConnectedUsers = numberOfConnectedClients;
     }
-    public String getNodeId() {
-        return NodeId;
+    public String getNodeID() {
+        return nodeID;
     }
 
     public int getPortNumber() {
@@ -80,7 +81,7 @@ public class Node implements Observer, Subject {
 
                 "otherNodesPorts=" + otherNodesPorts +
                 ", portNumber=" + portNumber +
-                ", nodeID=" + NodeId +
+                ", nodeID=" + nodeID +
                 ", numberOfConnectedUsers=" + numberOfConnectedUsers +
                 '}';
     }

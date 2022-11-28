@@ -22,11 +22,11 @@ public class NodesHandler implements Runnable{
         try {
 
             Message message = (Message) fromClient.readObject();
-            Node thisNode = nodesDaoUser.getNode("node1");
+            Node thisNode = Node.getInstance();
             thisNode.update(message);
             client.close();
 
-        } catch (IOException | ClassNotFoundException | ParseException e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 

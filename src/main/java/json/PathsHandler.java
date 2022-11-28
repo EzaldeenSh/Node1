@@ -1,7 +1,7 @@
 package json;
 
 public class PathsHandler {
-    private final String basePath = "C:\\Users\\User\\Desktop\\Outputs1";
+    private final String basePath = "src/main/resources/Data";
     public String getDatabasePath(String databaseName){
 
         return basePath +"\\"+ databaseName;

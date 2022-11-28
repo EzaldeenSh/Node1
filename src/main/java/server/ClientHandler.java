@@ -34,12 +34,9 @@ public class ClientHandler implements Runnable{
     public void run() {
         Node thisNode;
         NodesDaoUser nodesDaoUser;
-        try {
             nodesDaoUser = NodesDaoUser.getInstance();
-            thisNode = nodesDaoUser.getNode("node1");
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
-        }
+            thisNode = Node.getInstance();
+
         try{
             System.out.println("Client being handled");
             thisNode.setNumberOfConnectedUsers(thisNode.getNumberOfConnectedUsers() + 1);
@@ -131,7 +128,7 @@ public class ClientHandler implements Runnable{
                         JSONObject jsonObject = (JSONObject) fromClient.readObject();
                         boolean result;
                         String owner = new OwnershipHandler().getCollectionOwner(databaseName ,collectionName);
-                        if(owner.equals("node1")){
+                        if(owner.equals(thisNode.getNodeID())){
 
                             result = jsonFunctions.writeDocument(databaseName , collectionName , jsonObject);
                             if (result){
