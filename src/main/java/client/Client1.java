@@ -197,8 +197,10 @@ public class Client1 {
                      System.out.println("Please enter the name of the collection: ");
                      String collectionName = sc.next();
                      JSONObject jsonObject = new JSONObject();
-                     jsonObject.put("username" , "user1" );
-                     jsonObject.put("password" , "password1");
+                     jsonObject.put("nodeID" , "node4" );
+                     jsonObject.put("numberOfConnectedUsers" , 0);
+                     jsonObject.put("portNumber" , 8084);
+                     jsonObject.put("isActive" , true);
                      toServer.writeObject(databaseName);
                      toServer.writeObject(collectionName);
                      toServer.writeObject(jsonObject);
