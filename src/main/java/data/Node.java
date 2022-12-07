@@ -10,7 +10,7 @@ public class Node implements Observer, Subject {
 
     private List<Integer> otherNodesPorts;
     private final String nodeID;
-    private int portNumber;
+    private final int portNumber;
     private int numberOfConnectedUsers;
     private final NodesDaoUser nodesDaoUser;
 
@@ -38,16 +38,10 @@ public class Node implements Observer, Subject {
         this.otherNodesPorts = nodesDaoUser.getAllOtherPorts();
     }
 
-    public void setPortNumber(int portNumber) {
-        this.portNumber = portNumber;
-    }
-
     public void setNumberOfConnectedUsers(int numberOfConnectedClients) {
         this.numberOfConnectedUsers = numberOfConnectedClients;
     }
-    public List<Integer> getOtherNodesPorts(){
-        return otherNodesPorts;
-    }
+
     public String getNodeID() {
         return nodeID;
     }
@@ -59,8 +53,8 @@ public class Node implements Observer, Subject {
         return numberOfConnectedUsers;
     }
     @Override
-    public void update(Message message) {
-    new MessageExecutor().executeMessage(message);
+    public void update(Message message) throws IOException, ParseException {
+        new MessageExecutor().executeMessage(message);
     }
 
     @Override
@@ -85,7 +79,6 @@ public class Node implements Observer, Subject {
     @Override
     public String toString() {
         return "Node{" +
-
                 "otherNodesPorts=" + otherNodesPorts +
                 ", portNumber=" + portNumber +
                 ", nodeID=" + nodeID +

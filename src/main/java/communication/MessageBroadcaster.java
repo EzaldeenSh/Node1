@@ -6,7 +6,6 @@ import java.net.Socket;
 
 public class MessageBroadcaster {
     public void broadcastMessage(int portNumber,Message message) throws IOException {
-        System.out.println("Attempting connection on port number: " + portNumber);
         Socket socket = new Socket("localhost", portNumber);
         ObjectOutputStream toServer = new ObjectOutputStream(socket.getOutputStream());
         toServer.writeObject("Node");
